@@ -1,5 +1,8 @@
 import randomString from 'randomstring';
 import jsonwebtoken, { JwtPayload } from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
+
 
 
 // Errors
@@ -9,7 +12,10 @@ const errors = {
 
 // Constants
 const secret = (process.env.JWT_SECRET || randomString.generate(100)),
-    options = {expiresIn: process.env.COOKIE_EXP};
+    options = {
+        expiresIn: process.env.COOKIE_EXP,
+        algorithm: 'RS256'
+    };
 
 
 // Types
@@ -24,7 +30,8 @@ type TDecoded = string | JwtPayload | undefined;
  */
 function sign(data: JwtPayload): Promise<string> {
     return new Promise((resolve, reject) => {
-        jsonwebtoken.sign(data, secret, options, (err, token) => {
+        var privateKEY  = fs.readFileSync(path.dirname('./private.key'), 'utf8');
+        jsonwebtoken.sign(data, privateKEY, { algorithm: 'RS256' }, (err, token) => {
             err ? reject(err) : resolve(token || '');
         });
     });

@@ -33,6 +33,8 @@ export const cookieProps = Object.freeze({
 /**
  * Login a user.
  */
+//sean.maxwell@gmail.com
+//Password@1
 router.post(p.login, async (req: Request, res: Response) => {
     // Check email and password present
     const { email, password } = req.body;
@@ -43,7 +45,7 @@ router.post(p.login, async (req: Request, res: Response) => {
     const jwt = await authService.login(email, password);
     // Add jwt to cookie
     const { key, options } = cookieProps;
-    res.cookie(key, jwt, options);
+    // res.cookie(key, jwt, options);
     // Return
     return res.status(OK).json({
         token: jwt
