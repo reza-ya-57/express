@@ -3,6 +3,8 @@ import jsonwebtoken, { JwtPayload } from 'jsonwebtoken';
 import fs from 'fs';
 import path from 'path';
 
+var privateKey = fs.readFileSync(path.resolve('./src/util/private.key') , 'utf8');
+var publicKey = fs.readFileSync(path.resolve('./src/util/public.key') , 'utf8');
 
 
 // Errors
@@ -30,8 +32,7 @@ type TDecoded = string | JwtPayload | undefined;
  */
 function sign(data: JwtPayload): Promise<string> {
     return new Promise((resolve, reject) => {
-        var privateKEY  = fs.readFileSync(path.dirname('./private.key'), 'utf8');
-        jsonwebtoken.sign(data, privateKEY, { algorithm: 'RS256' }, (err, token) => {
+        jsonwebtoken.sign(data, privateKey, { algorithm: 'RS256' }, (err, token) => {
             err ? reject(err) : resolve(token || '');
         });
     });

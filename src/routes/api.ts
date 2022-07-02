@@ -11,7 +11,7 @@ const apiRouter = Router();
 
 // Add api routes
 apiRouter.use('/auth', authRouter);
-apiRouter.use('/sql', authMw , sqlRouter);
+apiRouter.use('/sql' , sqlRouter);
 apiRouter.use('/users', authMw, userRouter);
 apiRouter.use('/chat', authMw, chatRouter)
 

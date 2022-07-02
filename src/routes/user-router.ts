@@ -25,7 +25,10 @@ export const p = {
  */
 router.get(p.get, async (_: Request, res: Response) => {
     const users = await userService.getAll();
-    return res.status(OK).json({users});
+    return res.status(OK).json({
+        name: "hadi",
+        message: "to infinity and beyond!"
+    });
 });
 
 

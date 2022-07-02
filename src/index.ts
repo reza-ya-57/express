@@ -7,7 +7,7 @@ import server from './server';
 const serverStartMsg = 'Express server started on port: ',
         port = (process.env.PORT || 3000);
 
-// Start server
 server.listen(port, () => {
+// Start server
     logger.info(serverStartMsg + port);
 });
